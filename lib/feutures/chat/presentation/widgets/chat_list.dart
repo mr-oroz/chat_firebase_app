@@ -19,6 +19,7 @@ class ChatList extends StatelessWidget {
         final chat = chatRooms.elementAt(index);
         final userId = chat.members!.firstWhere(
           (userId) => userId != myUid,
+          orElse: () => '',
         );
         return ChatItem(
           item: chat,

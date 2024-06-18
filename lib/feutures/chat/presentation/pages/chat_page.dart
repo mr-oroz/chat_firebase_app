@@ -22,7 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     context.read<GetAllChatsBloc>().add(const GetAllChatsEvent.getAllChatRoom());
     context.read<SignInBloc>().add(const SignInEvent.login(
-        email: 'ali@mail.ru', password: 'test1234'));
+        email: 'oroz7307@gmail.com', password: 'test1234'));
     super.initState();
   }
 

@@ -13,13 +13,13 @@ class ChatItem extends StatelessWidget {
   const ChatItem({
     super.key,
     required this.getRandomGradient,
-    required this.item, required this.userId,
+    required this.item,
+    required this.userId,
   });
 
   final Gradient Function() getRandomGradient;
   final ChatRoom item;
   final String userId;
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,13 @@ class ChatItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailChatPage(
-                  uid: userId,
-                ),
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailChatPage(
+                uid: userId,
               ),
-            );
+            ),
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,28 +50,30 @@ class ChatItem extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: GlCircleAvatar(username: formatUserName),
                 title: Text(
-                  '${item.receiverUsername}',
+                  '${currentUid != item.receiverId ? item.receiverUsername : item.senderUsername}',
                   style: AppStyles.w600f15,
                 ),
-                subtitle: currentUid == item.lastSenderId ? Row(
-                  children: [
-                    Text(
-                      'Вы:',
-                      style: AppStyles.w500f12,
-                    ),
-                    Text(
-                      '${item.lastMessage}',
-                      style: AppStyles.w500f12.copyWith(
-                        color: AppColors.darkGrey,
+                subtitle: currentUid == item.lastSenderId
+                    ? Row(
+                        children: [
+                          Text(
+                            'Вы:',
+                            style: AppStyles.w500f12,
+                          ),
+                          Text(
+                            '${item.lastMessage}',
+                            style: AppStyles.w500f12.copyWith(
+                              color: AppColors.darkGrey,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        '${item.lastMessage}',
+                        style: AppStyles.w500f12.copyWith(
+                          color: AppColors.darkGrey,
+                        ),
                       ),
-                    ),
-                  ],
-                ) : Text(
-                  '${item.lastMessage}',
-                  style: AppStyles.w500f12.copyWith(
-                    color: AppColors.darkGrey,
-                  ),
-                ),
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

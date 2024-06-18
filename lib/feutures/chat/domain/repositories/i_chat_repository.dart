@@ -6,6 +6,7 @@ import 'package:chat_app_firebase/feutures/chat/domain/entities/message.dart';
 abstract class IChatRepository {
   Future<String> createChatRoom({
     required String receiverUsername,
+    required String senderUsername,
     required String uid,
 
   });

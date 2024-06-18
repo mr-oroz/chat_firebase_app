@@ -12,6 +12,8 @@ class ChatRoom with _$ChatRoom {
     String? lastSenderId,
     String? receiverId,
     String? receiverUsername,
+    String? senderUsername,
+
     @TimestampConverter() Timestamp? lastMessageTs,
     List<String>? members,
     @TimestampConverter() Timestamp? createdAt,
@@ -26,6 +28,7 @@ class ChatRoom with _$ChatRoom {
       chatRoomId: firestoreData['chatRoomId'] as String?,
       receiverId: firestoreData['receiverId'] as String?,
       receiverUsername: firestoreData['receiverUsername'] as String?,
+      senderUsername: firestoreData['senderUsername'] as String?,
       lastMessage: firestoreData['lastMessage'] as String?,
       lastSenderId: firestoreData['lastSenderId'] as String?,
       lastMessageTs: firestoreData['lastMessageTs'] as Timestamp?,

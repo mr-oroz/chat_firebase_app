@@ -18,8 +18,11 @@ class FirebaseChatRepository implements IChatRepository {
   FirebaseChatRepository(this.auth, this.firestore, this.storage);
 
   @override
-  Future<String> createChatRoom(
-      {required String receiverUsername, required String uid}) async {
+  Future<String> createChatRoom({
+    required String receiverUsername,
+    required String uid,
+    required String senderUsername,
+  }) async {
     try {
       final String currentUid = auth.currentUser!.uid;
       final CollectionReference chatrooms = firestore.collection('chatrooms');
@@ -44,6 +47,7 @@ class FirebaseChatRepository implements IChatRepository {
           lastSenderId: '',
           receiverId: uid,
           receiverUsername: receiverUsername,
+          senderUsername: senderUsername,
         );
         await firestore
             .collection('chatrooms')
