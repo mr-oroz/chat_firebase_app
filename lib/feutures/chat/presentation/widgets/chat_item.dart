@@ -5,6 +5,7 @@ import 'package:chat_app_firebase/core/utils/username_format/username_format.dar
 import 'package:chat_app_firebase/core/widgets/widgets.dart';
 import 'package:chat_app_firebase/feutures/chat/domain/entities/chat_room.dart';
 import 'package:chat_app_firebase/feutures/chat/presentation/pages/sub_pages/sub_pages.dart';
+import 'package:chat_app_firebase/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,6 +27,7 @@ class ChatItem extends StatelessWidget {
         ? formatDate(item.lastMessageTs!)
         : 'Неизвестно';
     final formatUserName = usernameFormat(item.receiverUsername.toString());
+    final currentUid = firebaseAuth.currentUser!.uid;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
@@ -51,7 +53,20 @@ class ChatItem extends StatelessWidget {
                   '${item.receiverUsername}',
                   style: AppStyles.w600f15,
                 ),
-                subtitle: Text(
+                subtitle: currentUid == item.lastSenderId ? Row(
+                  children: [
+                    Text(
+                      'Вы:',
+                      style: AppStyles.w500f12,
+                    ),
+                    Text(
+                      '${item.lastMessage}',
+                      style: AppStyles.w500f12.copyWith(
+                        color: AppColors.darkGrey,
+                      ),
+                    ),
+                  ],
+                ) : Text(
                   '${item.lastMessage}',
                   style: AppStyles.w500f12.copyWith(
                     color: AppColors.darkGrey,
