@@ -47,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               child: GlTextField(
                 onChanged: (value) {
-                  context.read<GetAllUsersBloc>().add(GetAllUsersEvent.search(value: value));
+                  context.read<GetAllChatsBloc>().add(GetAllChatsEvent.searchChat(query: value));
                 },
                 controller: searchCtrl,
                 hintText: 'Поиск',
