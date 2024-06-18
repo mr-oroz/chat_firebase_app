@@ -15,8 +15,8 @@ class ChatList extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final chat = chatRooms.elementAt(index);
         final myUid = firebaseAuth.currentUser!.uid;
+        final chat = chatRooms.elementAt(index);
         final userId = chat.members!.firstWhere(
           (userId) => userId != myUid,
         );
