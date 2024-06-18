@@ -26,11 +26,13 @@ class GetAllChatsBloc extends Bloc<GetAllChatsEvent, GetAllChatsState> {
           emit(GetAllChatsState.success(allChatRoom!));
         } else {
           final filteredChatRoom = allChatRoom!
-              .where(
-                (room) => room.receiverUsername!
-                    .toLowerCase()
-                    .contains(event.query.toLowerCase()),
-              )
+              .where((room) =>
+                  room.receiverUsername!
+                      .toLowerCase()
+                      .contains(event.query.toLowerCase()) ||
+                  room.senderUsername!
+                      .toLowerCase()
+                      .contains(event.query.toLowerCase()))
               .toList();
           emit(GetAllChatsState.success(filteredChatRoom));
         }
