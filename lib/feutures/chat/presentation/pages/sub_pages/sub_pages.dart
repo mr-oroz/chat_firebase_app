@@ -1,0 +1,1 @@
+export 'detail_chat_page.dart';
